@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "ee75291a-a9f2-4880-ba3d-f25e713fb153",
+		"name": "Express-devcamp-2465880",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "bootcamps",
+			"item": [
+				{
+					"name": "traer todos los bootcamps",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "traer bootcamps por id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Crear un nuevo bootcamps",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar bootcamps por id",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar bootcamps por id",
+					"request": {
+						"method": "DELETE",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PruebaBasic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:8069/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "8069",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
