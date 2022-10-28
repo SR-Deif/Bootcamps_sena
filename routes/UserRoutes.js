@@ -1,40 +1,17 @@
 const express =require('express')
+const { get } = require('express/lib/response')
 const router = express.Router()
+const {getAllUsers,getSingleUser,crearUser,actualizarUser,eliminarUser} = require('../controllers/UserController')
+const { put } = require('./BootcampRoutes')
 
-//Establecer las rutas de bootcamp
-//Crear rutas
-//1. get: solo obtener datos Read
-router.get('/', (req, res)=>{
-    res.status(200).json({
-        "Message": "Hola usuario"
-    })    
-})
+//Rutas de usuarios
+router.route('/')
+    .get(getAllUsers)
+    .post(crearUser)
 
-//2. get obtener recursos por id
-router.get('/:id', (req, res)=>{
-    res.status(200).json({
-        "Message": `Hola usuario, con el id ${req.params.id}`
-    })
-})
-
-//Post: crear un nuevo recurso
-router.post('/', (req, res)=>{
-    res.status(201).json({
-        "Message": "Nuevo usuario?¿"
-    })
-})
-
-//Put: Actualizar dato
-router.put('/:id', (req, res)=>{
-    res.status(200).json({
-        "Message": `Creo que aqui se actualiza ${req.params.id}`
-    })
-})
-//Delete: Eliminar un dato
-router.delete('/:id', (req, res)=>{
-    res.status(200).json({
-        "Message": `Creo que aqui se elimino el dato ${req.params.id}`
-    })
-})
+router.route('/:id')
+    .get(getSingleUser)
+    .put(actualizarUser)
+    .delete(eliminarUser)
 
 module.exports = router
