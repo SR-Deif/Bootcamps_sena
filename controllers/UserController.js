@@ -55,8 +55,17 @@ exports.actualizarUser= async(req, res)=>{
 }
 
 //Delete: Eliminar un dato
-exports.eliminarUser=(req, res)=>{
+exports.eliminarUser= async(req, res)=>{
+    //buscar al user por id
+    const u = await User.findByPk(req.params.id)
+    //eliminar user por id
+    await User.destroy({
+        where: {
+          id: req.params.id
+        }
+      });
     res.status(200).json({
-        "Message": `Creo que se elimino el usuario ${req.params.id}`
+        "success": true,
+        "data": u
     })
 }

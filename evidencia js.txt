@@ -1,0 +1,24 @@
+npx sequelize-cli model:generate --name Bootcamp --attributes name:string, description:string,phone:string,average_cost:float,average_rating:integer
+
+
+npx sequelize-cli model:generate --name courses --attributes title:string, description:string,weeks:string,enroll_cost:string,minimum_skill:string
+
+
+npx sequelize migration:generate --name add-bootcamps_id-to-courses
+
+npx sequelize-cli model:generate --name reviews --attributes title:string, text:string,rating:smallreal
+
+npx sequelize migration:generate --name add-bootcamps_id-to-reviews
+
+npx sequelize migration:generate --name add-users_id-to-reviews
+
+Evidencia 
+// migraciones
+
+1. migracion para crear la tabla users
+2.migracon para crear la tabla bootcamps
+3. migracion para crear la tabla fk user a bootcamps
+4. migracion para crear la tabla cursos
+5. migracion para crear una fk  bootcamps a cursos
+6. migracion para crear tabla reviews
+7. migracion para crear una fk bootcamps a reviews + users + reviews
