@@ -19,7 +19,6 @@ const app = express()
 app.use(express.json())
 //ejecutar conexion DB
 connectDB()
-
 app.use('/api/v1/bootcamps', bootcampRoutes)
 
 app.use('/api/v1/users', userRoutes)
