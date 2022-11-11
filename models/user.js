@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     validate:{
       isAlpha: {
         args: true,
-        msg: 'El nombre slo debe de tener letras :D'
+        msg: 'El nombre solo debe de tener letras :D'
       },
       notEmpty:{
         args: true,

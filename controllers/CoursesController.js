@@ -3,19 +3,17 @@ const sequelize = require('../config/seq')
 //
 const {DataTypes, ValidationError} = require('sequelize')
 //
-const UserModel= require('../models/user')
+const CoursesModel= require('../models/courses')
 
 //
-const User = UserModel(sequelize, DataTypes)
-//Establecer las rutas de bootcamp
-//Crear rutas
-//1. get: solo obtener datos Read
-exports.getAllUsers= async(req, res)=>{
+const Courses = CoursesModel(sequelize, DataTypes)
+
+exports.getAllCourses= async(req, res)=>{
     try {
-        const users = await User.findAll();
+        const courses = await Courses.findAll();
         res.status(200).json({
             "success": true,
-            "data": users
+            "data": courses
         })   
     } catch (error) {
         res.status(500)
@@ -28,21 +26,21 @@ exports.getAllUsers= async(req, res)=>{
 }
 
 //2. get obtener recursos por id
-exports.getSingleUser=async(req, res)=>{
+exports.getSingleCourses=async(req, res)=>{
     try {
-        const userId = await User.findByPk(req.params.id)
+        const coursesId = await Courses.findByPk(req.params.id)
         //si uaurio no existe
-        if(!userId){
+        if(!coursesId){
             res.status(422).json({
                 "success": true,
                 "errors": [
-                    "usuario no existe"
+                    "Courses no existe"
                 ]
             })
         }
         res.status(200).json({
             "success": true,
-            "data": userId
+            "data": coursesId
         })
     } catch (error) {
         res.status(500)
@@ -55,12 +53,12 @@ exports.getSingleUser=async(req, res)=>{
 }
 
 //Post: crear un nuevo recurso
-exports.crearUser= async(req, res)=>{
+exports.crearCourses= async(req, res)=>{
     try {
-        const newUser = await User.create( req.body);
+        const newcourses = await Courses.create( req.body);
         res.status(201).json({
             "success": true,
-            "data": newUser
+            "data": newcourses
         })
     } catch (error) {
         if(error instanceof ValidationError){
@@ -86,35 +84,38 @@ exports.crearUser= async(req, res)=>{
     }
 
 
-//PUT - PATCH: actualizar
-exports.actualizarUser = async(req , res)=>{
+
+
+
+ //PUT - PATCH: actualizar
+exports.actualizarCourses = async(req , res)=>{
     try {
         //consultar datos actualizados
-      const upUser = await User.findByPk(req.params.id)
-      if(!upUser){
+      const upCourses = await Courses.findByPk(req.params.id)
+      if(!upCourses){
         //response de usuario no encontrado
         res.status(422).json(
             {
                 "success": false,
                 "errors": [
-                    "usuario no existe"
+                    "Curso no existe"
                 ]  
             }
            )   
        }else{
             //actualizar usuario por id
-            await User.update(req.body, {
+            await Courses.update(req.body, {
                 where: {
                 id: req.params.id
                 }
             });
             //seleccionar usuario actualizado
               //consultar datos actualizados
-            const userAct = await User.findByPk(req.params.id)
+            const coursesAct = await Courses.findByPk(req.params.id)
             //enviar response con usuario actualizado
             res.status(200).json({
                 "success" : true,
-                "data" :  userAct
+                "data" :  coursesAct
             })
        }
     } catch (error) {
@@ -130,11 +131,11 @@ exports.actualizarUser = async(req , res)=>{
 
 
 //Delete: Eliminar un dato
-exports.eliminarUser= async(req, res)=>{
+exports.eliminarCourses= async(req, res)=>{
     //buscar al user por id
-    const u = await User.findByPk(req.params.id)
+    const u = await Courses.findByPk(req.params.id)
     //eliminar user por id
-    await User.destroy({
+    await Courses.destroy({
         where: {
           id: req.params.id
         }

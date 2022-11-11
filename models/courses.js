@@ -14,14 +14,71 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   courses.init({
-    title: DataTypes.STRING,
-    description: DataTypes.STRING,
-    weeks: DataTypes.STRING,
-    enroll_cost: DataTypes.STRING,
-    minimum_skill: DataTypes.STRING
+
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true, 
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
+
+    description:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
+
+    weeks: {
+      type:  DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
+
+    enroll_cost:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
+
+    minimum_skill: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+      }
+    },
   }, {
     sequelize,
     modelName: 'courses',
+    timestamps: false
   });
   return courses;
 };

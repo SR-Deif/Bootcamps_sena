@@ -3,19 +3,19 @@ const sequelize = require('../config/seq')
 //
 const {DataTypes, ValidationError} = require('sequelize')
 //
-const UserModel= require('../models/user')
+const ReviewsModel= require('../models/reviews')
 
 //
-const User = UserModel(sequelize, DataTypes)
-//Establecer las rutas de bootcamp
-//Crear rutas
+const Reviews = ReviewsModel(sequelize, DataTypes)
+
+
 //1. get: solo obtener datos Read
-exports.getAllUsers= async(req, res)=>{
+exports.getAllReviews= async(req, res)=>{
     try {
-        const users = await User.findAll();
+        const Review = await Reviews.findAll();
         res.status(200).json({
             "success": true,
-            "data": users
+            "data": Review
         })   
     } catch (error) {
         res.status(500)
@@ -28,11 +28,11 @@ exports.getAllUsers= async(req, res)=>{
 }
 
 //2. get obtener recursos por id
-exports.getSingleUser=async(req, res)=>{
+exports.getSingleReviews=async(req, res)=>{
     try {
-        const userId = await User.findByPk(req.params.id)
+        const reviewsId = await Reviews.findByPk(req.params.id)
         //si uaurio no existe
-        if(!userId){
+        if(!reviewsId){
             res.status(422).json({
                 "success": true,
                 "errors": [
@@ -42,7 +42,7 @@ exports.getSingleUser=async(req, res)=>{
         }
         res.status(200).json({
             "success": true,
-            "data": userId
+            "data": reviewsId
         })
     } catch (error) {
         res.status(500)
@@ -54,13 +54,14 @@ exports.getSingleUser=async(req, res)=>{
 
 }
 
+
 //Post: crear un nuevo recurso
-exports.crearUser= async(req, res)=>{
+exports.crearReviews= async(req, res)=>{
     try {
-        const newUser = await User.create( req.body);
+        const newReviews = await Reviews.create( req.body);
         res.status(201).json({
             "success": true,
-            "data": newUser
+            "data": newReviews
         })
     } catch (error) {
         if(error instanceof ValidationError){
@@ -85,13 +86,12 @@ exports.crearUser= async(req, res)=>{
     }
     }
 
-
 //PUT - PATCH: actualizar
-exports.actualizarUser = async(req , res)=>{
+exports.actualizarReviews = async(req , res)=>{
     try {
         //consultar datos actualizados
-      const upUser = await User.findByPk(req.params.id)
-      if(!upUser){
+    const upReviews = await Reviews.findByPk(req.params.id)
+    if(!upReviews){
         //response de usuario no encontrado
         res.status(422).json(
             {
@@ -100,45 +100,43 @@ exports.actualizarUser = async(req , res)=>{
                     "usuario no existe"
                 ]  
             }
-           )   
-       }else{
+        )   
+    }else{
             //actualizar usuario por id
-            await User.update(req.body, {
+            await Reviews.update(req.body, {
                 where: {
                 id: req.params.id
                 }
             });
             //seleccionar usuario actualizado
               //consultar datos actualizados
-            const userAct = await User.findByPk(req.params.id)
+            const reviewsAct = await Reviews.findByPk(req.params.id)
             //enviar response con usuario actualizado
             res.status(200).json({
                 "success" : true,
-                "data" :  userAct
+                "data" :  reviewsAct
             })
-       }
+    }
     } catch (error) {
         res
         .status(500)
         .json({
-             "success": false, 
-             "errors":  "error de servidor"  
+            "success": false, 
+            "errors":  "error de servidor"  
         })
     }
- }
+}
 
-
-
-//Delete: Eliminar un dato
-exports.eliminarUser= async(req, res)=>{
+ //Delete: Eliminar un dato
+exports.eliminarReviews= async(req, res)=>{
     //buscar al user por id
-    const u = await User.findByPk(req.params.id)
+    const u = await Reviews.findByPk(req.params.id)
     //eliminar user por id
-    await User.destroy({
+    await Reviews.destroy({
         where: {
-          id: req.params.id
+        id: req.params.id
         }
-      });
+    });
     res.status(200).json({
         "success": true,
         "data": u

@@ -14,12 +14,44 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   reviews.init({
-    title: DataTypes.STRING,
-    text: DataTypes.STRING,
-    rating: DataTypes.STRING
+    title:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
+    text: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
+    
+    rating:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate:{
+        notEmpty:{
+          args: true,
+          msg: 'Campo vacio'
+        },
+        notNull: true
+      }
+    },
   }, {
     sequelize,
     modelName: 'reviews',
+    timestamps: false
   });
   return reviews;
 };

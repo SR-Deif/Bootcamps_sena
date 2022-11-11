@@ -8,6 +8,8 @@ const connectDB = require(`./config/db`)
 //Dependencias de las rutas
 const bootcampRoutes = require('./routes/BootcampRoutes')
 const userRoutes = require('./routes/UserRoutes')
+const coursesRoutes = require('./routes/CoursesRoutes')
+const reviewsRoutes = require('./routes/ReviewsRoutes')
 //establecer el archivo de configuracion
 //con variables de entorno del proyecto
 dotenv.config({
@@ -20,8 +22,9 @@ app.use(express.json())
 //ejecutar conexion DB
 connectDB()
 app.use('/api/v1/bootcamps', bootcampRoutes)
-
 app.use('/api/v1/users', userRoutes)
+app.use('/api/v1/courses', coursesRoutes)
+app.use('/api/v1/reviews', reviewsRoutes)
 
 console.log(listEndpoints(app))
 //3. ejecutar servidos de desarrollo express
